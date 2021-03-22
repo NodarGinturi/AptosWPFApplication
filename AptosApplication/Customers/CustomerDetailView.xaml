@@ -1,0 +1,97 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:local="clr-namespace:AptosApplication.Customers"
+             xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:root="clr-namespace:AptosApplication" xmlns:Data="clr-namespace:Aptos.Data;assembly=Aptos.Data" x:Class="AptosApplication.Customers.CustomerDetailView"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="grid1" 
+              VerticalAlignment="Top"
+              Margin="150,11,0,0" 
+              HorizontalAlignment="Left" 
+              DataContext="{Binding ACustomer}" 
+              Height="140" 
+              Width="459" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="113*"/>
+                <ColumnDefinition Width="149*"/>
+            </Grid.ColumnDefinitions>
+            <Label VerticalAlignment="Center" Grid.Row="2" Margin="7,6,0,3" HorizontalAlignment="Left" Grid.Column="4" Content="Birth Date Day:" Height="26" Width="89"/>
+            <ComboBox x:Name="birthDateDayTextBox" Width="120" VerticalAlignment="Center" Text="{Binding BirthDateDay, ValidatesOnNotifyDataErrors=True}" Grid.Row="2" Margin="18,4,0,9" Height="22" HorizontalAlignment="Left" Grid.Column="5"/>
+            <Label VerticalAlignment="Center" Grid.Row="1" Margin="7,7,0,2" HorizontalAlignment="Left" Grid.Column="4" Content="Birth Date Month:" Height="26" Width="104"/>
+            <ComboBox x:Name="birthDateMonthTextBox" Width="120" VerticalAlignment="Center" Text="{Binding BirthDateMonth,ValidatesOnNotifyDataErrors=True}" Grid.Row="1" Margin="18,5,0,6" Height="24" HorizontalAlignment="Left" Grid.Column="5"/>
+            <Label VerticalAlignment="Center" Margin="7,6,0,4" HorizontalAlignment="Left" Grid.Column="4" Content="Birth Date Year:" Height="26" Width="91"/>
+            <ComboBox x:Name="birthDateYearTextBox" Width="120" VerticalAlignment="Center" Text="{Binding BirthDateYear,ValidatesOnNotifyDataErrors=True}" Margin="18,6,0,8" Height="22" HorizontalAlignment="Left" Grid.Column="5" />
+            <Label VerticalAlignment="Center" Grid.Row="3" Margin="3,5,0,3" HorizontalAlignment="Left" Grid.Column="0" Content="Comment:" Height="26" Width="65"/>
+            <TextBox x:Name="commentTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Comment,  ValidatesOnNotifyDataErrors=True}" Grid.Row="3" Margin="4,5,0,5" Height="24" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="0" Margin="3,4,0,6" HorizontalAlignment="Left" Grid.Column="0" Content="First Name:" Height="26" Width="70"/>
+            <TextBox x:Name="firstNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding FirstName, ValidatesOnNotifyDataErrors=True}" Grid.Row="0" Margin="4,6,0,8" Height="22" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="2" Margin="3,4,0,5" HorizontalAlignment="Left" Grid.Column="0" Content="Gender:" Height="26" Width="51"/>
+            <ComboBox x:Name="genderTextBox" Width="120"  VerticalAlignment="Center" Text="{Binding Gender, ValidatesOnNotifyDataErrors=True}" Grid.Row="2" Margin="4,6,0,7" Height="22" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="1" Margin="3,5,0,4" HorizontalAlignment="Left" Grid.Column="0" Content="Last Name:" Height="26" Width="69"/>
+            <TextBox x:Name="lastNameTextBox" Width="120" VerticalAlignment="Center" Text="{Binding LastName, ValidatesOnNotifyDataErrors=True}" Grid.Row="1" Margin="4,7,0,6" Height="22" HorizontalAlignment="Left" Grid.Column="1"/>
+        </Grid>
+
+        <ListBox Name="Thumbnails" 
+                 Grid.ColumnSpan="2" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                 Margin="100,170,100,50"
+                 DataContext="{Binding ACustomer}"  ItemsSource="{Binding Images}" 
+                 AllowDrop="True"
+                 Drop="Thumbnails_Drop"
+                 >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="3"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding}"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <StackPanel Grid.ColumnSpan="2" Orientation="Horizontal" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button Grid.ColumnSpan="2" 
+                    Content="Save" 
+                    Command="{Binding SaveCustomer}"
+                    Margin="10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom" 
+                    Width="75"/>
+            <Button Grid.ColumnSpan="2" 
+                    Content="Cancel" 
+                    Command="{Binding Cancel}" 
+                    HorizontalAlignment="Center" 
+                    Margin="10" 
+                    VerticalAlignment="Bottom" 
+                    Width="75"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
